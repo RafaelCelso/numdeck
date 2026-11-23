@@ -1,0 +1,374 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:NumDeck.App.ViewModels">
+
+    <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+    <!-- ===================== Palette ===================== -->
+    <Color x:Key="NdCyan">#22D3EE</Color>
+    <Color x:Key="NdViolet">#8B5CF6</Color>
+
+    <SolidColorBrush x:Key="NdBg" Color="#080B12" />
+    <SolidColorBrush x:Key="NdSurface" Color="#E00F141E" />
+    <SolidColorBrush x:Key="NdSurfaceRaised" Color="#151C29" />
+    <SolidColorBrush x:Key="NdStroke" Color="#1E2736" />
+    <SolidColorBrush x:Key="NdStrokeStrong" Color="#2B3850" />
+    <SolidColorBrush x:Key="NdText" Color="#E6EDF7" />
+    <SolidColorBrush x:Key="NdTextSecondary" Color="#94A3B8" />
+    <SolidColorBrush x:Key="NdTextTertiary" Color="#5B6B82" />
+    <SolidColorBrush x:Key="NdCyanBrush" Color="{StaticResource NdCyan}" />
+    <SolidColorBrush x:Key="NdVioletBrush" Color="{StaticResource NdViolet}" />
+    <SolidColorBrush x:Key="NdGreen" Color="#34D399" />
+    <SolidColorBrush x:Key="NdRed" Color="#F87171" />
+    <SolidColorBrush x:Key="NdCyanSoft" Color="#1A22D3EE" />
+    <SolidColorBrush x:Key="NdCyanEdge" Color="#5522D3EE" />
+
+    <LinearGradientBrush x:Key="NdBrand" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource NdCyan}" Offset="0" />
+        <GradientStop Color="{StaticResource NdViolet}" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="NdBrandHorizontal" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="{StaticResource NdCyan}" Offset="0" />
+        <GradientStop Color="{StaticResource NdViolet}" Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- Key cap: lit from the top -->
+    <LinearGradientBrush x:Key="NdKeycap" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#1C2433" Offset="0" />
+        <GradientStop Color="#131926" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="NdKeycapHover" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#232D40" Offset="0" />
+        <GradientStop Color="#182030" Offset="1" />
+    </LinearGradientBrush>
+    <!-- The numpad "device" the keys sit on -->
+    <LinearGradientBrush x:Key="NdPlate" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#0D121C" Offset="0" />
+        <GradientStop Color="#090D15" Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- Faint grid behind everything -->
+    <DrawingBrush x:Key="NdGridPattern" TileMode="Tile" Viewport="0,0,28,28" ViewportUnits="Absolute" Opacity="0.05">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Geometry="M0,0 L28,0 M0,0 L0,28">
+                <GeometryDrawing.Pen>
+                    <Pen Brush="#9FB4D8" Thickness="1" />
+                </GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <FontFamily x:Key="NdIcons">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+    <FontFamily x:Key="NdMono">Cascadia Mono, Consolas</FontFamily>
+    <FontFamily x:Key="NdDisplay">Segoe UI Variable Display, Segoe UI</FontFamily>
+
+    <!-- ===================== Text ===================== -->
+    <Style x:Key="SectionTitle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource NdMono}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="Foreground" Value="{StaticResource NdTextTertiary}" />
+    </Style>
+
+    <Style x:Key="FieldLabel" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0,14,0,6" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{StaticResource NdTextSecondary}" />
+    </Style>
+
+    <Style x:Key="Hint" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="11.5" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="0,6,0,0" />
+        <Setter Property="Foreground" Value="{StaticResource NdTextTertiary}" />
+    </Style>
+
+    <Style x:Key="Icon" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource NdIcons}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- ===================== Surfaces ===================== -->
+    <Style x:Key="Card" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource NdSurface}" />
+        <Setter Property="BorderBrush" Value="{StaticResource NdStroke}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="18" />
+    </Style>
+
+    <!-- Small rounded label: "ATIVO", "CONECTADO"… -->
+    <Style x:Key="Pill" TargetType="Border">
+        <Setter Property="CornerRadius" Value="99" />
+        <Setter Property="Padding" Value="9,3" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- Borderless icon button (glyph content) -->
+    <Style x:Key="IconButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource NdTextSecondary}" />
+        <Setter Property="FontFamily" Value="{StaticResource NdIcons}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Width" Value="34" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" CornerRadius="8" Background="{StaticResource NdSurfaceRaised}"
+                            BorderBrush="{StaticResource NdStroke}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource NdCyanEdge}" />
+                            <Setter Property="Foreground" Value="{StaticResource NdCyanBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource NdCyanSoft}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.35" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Big gradient call-to-action ("Testar") -->
+    <Style x:Key="BrandButton" TargetType="Button">
+        <Setter Property="Foreground" Value="#06121A" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Padding" Value="18,7" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="Glow" CornerRadius="8" Background="{StaticResource NdBrandHorizontal}" Opacity="0">
+                            <Border.Effect>
+                                <BlurEffect Radius="14" />
+                            </Border.Effect>
+                        </Border>
+                        <Border x:Name="Bd" CornerRadius="8" Background="{StaticResource NdBrandHorizontal}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Glow" Property="Opacity" Value="0.55" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.85" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ===================== Lists ===================== -->
+
+    <!-- Profile rows -->
+    <Style x:Key="ProfileItem" TargetType="ListBoxItem">
+        <Setter Property="Foreground" Value="{StaticResource NdText}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="0,0,0,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Bd" CornerRadius="9" Background="Transparent" BorderThickness="1" BorderBrush="Transparent"
+                            Padding="12,9" SnapsToDevicePixels="True">
+                        <Grid>
+                            <Border x:Name="Bar" Width="3" CornerRadius="2" Margin="-12,-3,0,-3" HorizontalAlignment="Left"
+                                    Background="{StaticResource NdBrand}" Visibility="Collapsed" />
+                            <ContentPresenter />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#111826" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource NdCyanSoft}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#3322D3EE" />
+                            <Setter TargetName="Bar" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Action type tiles (icon + short name) -->
+    <Style x:Key="ActionTile" TargetType="ListBoxItem">
+        <Setter Property="Foreground" Value="{StaticResource NdTextSecondary}" />
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="ToolTip" Value="{Binding Name}" />
+        <Setter Property="AutomationProperties.Name" Value="{Binding Name}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Bd" CornerRadius="10" Background="{StaticResource NdSurfaceRaised}" BorderThickness="1"
+                            BorderBrush="{StaticResource NdStroke}" Height="62">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="Glyph" Text="{Binding Glyph}" Style="{StaticResource Icon}" FontSize="18"
+                                       HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding ShortName}" FontSize="11" Margin="0,6,0,0" HorizontalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource NdStrokeStrong}" />
+                            <Setter Property="Foreground" Value="{StaticResource NdText}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource NdCyanSoft}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource NdCyanBrush}" />
+                            <Setter TargetName="Glyph" Property="Foreground" Value="{StaticResource NdCyanBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource NdText}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ===================== Deck key ===================== -->
+    <!-- A key on the on-screen deck. DataContext = KeyCellViewModel. -->
+    <Style x:Key="DeckKey" TargetType="Button">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="AutomationProperties.Name" Value="{Binding KeyLabel, StringFormat=Tecla {0}}" />
+        <Setter Property="Foreground" Value="{StaticResource NdText}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="Cap">
+                        <!-- Neon halo (selected / pressed) -->
+                        <Border x:Name="Halo" CornerRadius="14" Margin="1" Background="{StaticResource NdBrand}" Opacity="0">
+                            <Border.Effect>
+                                <BlurEffect Radius="16" />
+                            </Border.Effect>
+                        </Border>
+                        <!-- Drop shadow under the cap -->
+                        <Border CornerRadius="13" Background="#000000" Opacity="0.45" Margin="0,3,0,-3">
+                            <Border.Effect>
+                                <BlurEffect Radius="6" />
+                            </Border.Effect>
+                        </Border>
+                        <Border x:Name="Edge" CornerRadius="13" Padding="1.5" Background="{StaticResource NdStrokeStrong}">
+                            <Border x:Name="Root" CornerRadius="12" Background="{StaticResource NdKeycap}" Padding="9,7">
+                                <Grid>
+                                    <!-- top highlight -->
+                                    <Border CornerRadius="12,12,0,0" Height="1" VerticalAlignment="Top" Margin="2,-6,2,0" Background="#18FFFFFF" />
+                                    <TextBlock x:Name="KeyName" Text="{Binding KeyLabel}" FontFamily="{StaticResource NdMono}" FontSize="10.5"
+                                               Foreground="{StaticResource NdTextTertiary}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                    <Ellipse x:Name="Dot" Width="6" Height="6" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,3,0,0"
+                                             Fill="{StaticResource NdCyanBrush}" Visibility="Collapsed">
+                                        <Ellipse.Effect>
+                                            <DropShadowEffect Color="{StaticResource NdCyan}" BlurRadius="8" ShadowDepth="0" Opacity="0.9" />
+                                        </Ellipse.Effect>
+                                    </Ellipse>
+
+                                    <StackPanel x:Name="Body" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0">
+                                        <Grid HorizontalAlignment="Center" Width="26" Height="26">
+                                            <TextBlock x:Name="Glyph" Style="{StaticResource Icon}" FontSize="20" HorizontalAlignment="Center"
+                                                       Foreground="{StaticResource NdCyanBrush}"
+                                                       Text="{Binding Binding.Action, Converter={x:Static vm:Converters.ActionGlyph}}" />
+                                            <Image x:Name="AppIcon" Width="26" Height="26" RenderOptions.BitmapScalingMode="HighQuality"
+                                                   Source="{Binding Binding.Action.Apps[0].Path, Converter={x:Static vm:Converters.ShellIcon}}" />
+                                        </Grid>
+                                        <TextBlock x:Name="Title" FontWeight="SemiBold" FontSize="12" Margin="0,6,0,0"
+                                                   TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="32">
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{x:Static vm:Converters.FirstNonEmpty}">
+                                                    <Binding Path="Binding.Label" />
+                                                    <Binding Path="Binding.Action.Summary" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock x:Name="Sub" Text="{Binding Binding.Action.Summary}" FontSize="10.5" Margin="0,2,0,0"
+                                                   Foreground="{StaticResource NdTextSecondary}" TextAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   Visibility="{Binding Binding.Label, Converter={x:Static vm:Converters.NonEmptyToVisible}}" />
+                                    </StackPanel>
+
+                                    <!-- Inherited from "Teclas globais" -->
+                                    <StackPanel x:Name="Inherited" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0" Opacity="0.55"
+                                                Visibility="{Binding ShowsGlobal, Converter={StaticResource BoolToVisibility}}">
+                                        <TextBlock Style="{StaticResource Icon}" FontSize="16" HorizontalAlignment="Center" Foreground="{StaticResource NdVioletBrush}"
+                                                   Text="{Binding GlobalBinding.Action, Converter={x:Static vm:Converters.ActionGlyph}}" />
+                                        <TextBlock Text="{Binding GlobalBinding.Action.Summary, StringFormat=★ {0}}" FontSize="10.5" Margin="0,5,0,0"
+                                                   TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="28" />
+                                    </StackPanel>
+
+                                    <!-- Empty key: "+" on hover -->
+                                    <TextBlock x:Name="Plus" Style="{StaticResource Icon}" Text="&#xE710;" FontSize="16" Margin="0,8,0,0"
+                                               HorizontalAlignment="Center" Foreground="{StaticResource NdTextTertiary}" Visibility="Collapsed" />
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- configured key: neon edge + status dot -->
+                        <DataTrigger Binding="{Binding Binding.Action, Converter={x:Static vm:Converters.IsNotNull}}" Value="True">
+                            <Setter TargetName="Edge" Property="Background" Value="{StaticResource NdCyanEdge}" />
+                            <Setter TargetName="Dot" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Binding.Action}" Value="{x:Null}">
+                            <Setter TargetName="Body" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source, ElementName=AppIcon, Converter={x:Static vm:Converters.IsNotNull}}" Value="True">
+                            <Setter TargetName="Glyph" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Root" Property="Background" Value="{StaticResource NdKeycapHover}" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Binding.Action}" Value="{x:Null}" />
+                                <Condition Binding="{Binding ShowsGlobal}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="Plus" Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                            <Setter TargetName="Edge" Property="Background" Value="{StaticResource NdBrand}" />
+                            <Setter TargetName="Edge" Property="Padding" Value="2" />
+                            <Setter TargetName="Halo" Property="Opacity" Value="0.45" />
+                            <Setter TargetName="KeyName" Property="Foreground" Value="{StaticResource NdCyanBrush}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsDragSource}" Value="True">
+                            <Setter TargetName="Cap" Property="Opacity" Value="0.35" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsDropTarget}" Value="True">
+                            <Setter TargetName="Edge" Property="Background" Value="{StaticResource NdCyanBrush}" />
+                            <Setter TargetName="Edge" Property="Padding" Value="2" />
+                            <Setter TargetName="Root" Property="Background" Value="#16303F" />
+                            <Setter TargetName="Halo" Property="Opacity" Value="0.35" />
+                        </DataTrigger>
+                        <!-- physical key pressed on the deck -->
+                        <DataTrigger Binding="{Binding IsPressed}" Value="True">
+                            <Setter TargetName="Root" Property="Background" Value="{StaticResource NdBrand}" />
+                            <Setter TargetName="Edge" Property="Background" Value="{StaticResource NdBrand}" />
+                            <Setter TargetName="Halo" Property="Opacity" Value="0.9" />
+                            <Setter TargetName="Glyph" Property="Foreground" Value="#06121A" />
+                            <Setter TargetName="KeyName" Property="Foreground" Value="#06121A" />
+                            <Setter TargetName="Sub" Property="Foreground" Value="#0B1B26" />
+                            <Setter Property="Foreground" Value="#06121A" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

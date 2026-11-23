@@ -1,0 +1,37 @@
+# Build output (.NET)
+bin/
+obj/
+TestResults/
+*.binlog
+
+# The native hook DLL is committed so the project builds without Zig
+# (native\build.ps1 only runs when it is missing). Only its debug files stay out.
+!native/bin/
+native/bin/*.pdb
+native/bin/*.lib
+native/bin/*.exp
+.zig-cache/
+zig-cache/
+zig-out/
+
+# Release artifacts (scripts\build-release.ps1); attached to GitHub releases instead
+publish/
+dist/
+
+# IDEs and editors
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.rsuser
+*.swp
+
+# Local tooling and personal settings
+.claude/settings.local.json
+*.log
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store

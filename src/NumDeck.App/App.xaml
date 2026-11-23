@@ -1,0 +1,51 @@
+﻿<Application x:Class="NumDeck.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown"
+             ThemeMode="Dark">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Theme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- NumDeck accent (cyan) instead of the Windows accent color, for the Fluent controls
+                 (check boxes, focus lines, selected items, accent buttons). Defined here, outside the
+                 merged dictionaries, so they take precedence over the theme's own values. -->
+            <Color x:Key="{x:Static SystemColors.AccentColorKey}">#22D3EE</Color>
+            <Color x:Key="{x:Static SystemColors.AccentColorLight1Key}">#4FDDF2</Color>
+            <Color x:Key="{x:Static SystemColors.AccentColorLight2Key}">#22D3EE</Color>
+            <Color x:Key="{x:Static SystemColors.AccentColorLight3Key}">#A5F0FA</Color>
+            <Color x:Key="{x:Static SystemColors.AccentColorDark1Key}">#0EA5C4</Color>
+            <Color x:Key="{x:Static SystemColors.AccentColorDark2Key}">#0B7F98</Color>
+            <Color x:Key="{x:Static SystemColors.AccentColorDark3Key}">#075A6C</Color>
+            <SolidColorBrush x:Key="{x:Static SystemColors.AccentColorBrushKey}" Color="#22D3EE" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.AccentColorLight1BrushKey}" Color="#4FDDF2" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.AccentColorLight2BrushKey}" Color="#22D3EE" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.AccentColorLight3BrushKey}" Color="#A5F0FA" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.AccentColorDark1BrushKey}" Color="#0EA5C4" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.AccentColorDark2BrushKey}" Color="#0B7F98" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.AccentColorDark3BrushKey}" Color="#075A6C" />
+            <SolidColorBrush x:Key="AccentFillColorPrimaryBrush" Color="#22D3EE" />
+            <SolidColorBrush x:Key="AccentDefaultBrush" Color="#22D3EE" />
+            <SolidColorBrush x:Key="AccentSecondaryBrush" Color="#E622D3EE" />
+            <SolidColorBrush x:Key="AccentTertiaryBrush" Color="#CC22D3EE" />
+            <Color x:Key="SystemAccentColor">#22D3EE</Color>
+            <Color x:Key="SystemAccentColorLight1">#4FDDF2</Color>
+            <Color x:Key="SystemAccentColorLight2">#22D3EE</Color>
+            <Color x:Key="SystemAccentColorLight3">#A5F0FA</Color>
+            <Color x:Key="SystemAccentColorDark1">#0EA5C4</Color>
+            <Color x:Key="SystemAccentColorDark2">#0B7F98</Color>
+            <Color x:Key="SystemAccentColorDark3">#075A6C</Color>
+            <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="#22D3EE" />
+            <SolidColorBrush x:Key="AccentFillColorSecondaryBrush" Color="#E622D3EE" />
+            <SolidColorBrush x:Key="AccentFillColorTertiaryBrush" Color="#CC22D3EE" />
+            <SolidColorBrush x:Key="AccentTextFillColorPrimaryBrush" Color="#67E8F9" />
+            <SolidColorBrush x:Key="AccentTextFillColorSecondaryBrush" Color="#67E8F9" />
+            <SolidColorBrush x:Key="AccentTextFillColorTertiaryBrush" Color="#22D3EE" />
+            <SolidColorBrush x:Key="TextOnAccentFillColorPrimaryBrush" Color="#06121A" />
+            <SolidColorBrush x:Key="TextOnAccentFillColorSecondaryBrush" Color="#0B1B26" />
+            <SolidColorBrush x:Key="SystemFillColorAttentionBrush" Color="#22D3EE" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

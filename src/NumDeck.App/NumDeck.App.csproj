@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>NumDeck</AssemblyName>
+    <RootNamespace>NumDeck.App</RootNamespace>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\numdeck.ico</ApplicationIcon>
+    <!-- Release version: overridden by scripts\build-release.ps1 -Version x.y.z -->
+    <Version>1.2.0</Version>
+    <Product>NumDeck</Product>
+    <Company>Rafael Celso</Company>
+    <Description>Transforma um teclado numérico externo num Stream Deck</Description>
+    <Copyright>© Rafael Celso</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NumDeck.Core\NumDeck.Core.csproj" />
+    <ProjectReference Include="..\NumDeck.Input\NumDeck.Input.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="H.NotifyIcon.Wpf" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\numdeck.ico" />
+    <!-- Native hook DLL (built by native\build.ps1). Kept next to the exe:
+         Windows may inject it into other processes, so it can't be bundled. -->
+    <None Include="..\..\native\bin\NumDeckHook64.dll"
+          Link="native\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+  <Target Name="BuildNativeHook" BeforeTargets="BeforeBuild" Condition="!Exists('..\..\native\bin\NumDeckHook64.dll')">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\..\..\native\build.ps1&quot;" />
+  </Target>
+
+</Project>
