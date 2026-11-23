@@ -13,7 +13,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets\numdeck.ico</ApplicationIcon>
     <!-- Release version: overridden by scripts\build-release.ps1 -Version x.y.z -->
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Product>NumDeck</Product>
     <Company>Rafael Celso</Company>
     <Description>Transforma um teclado numérico externo num Stream Deck</Description>

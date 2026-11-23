@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Win32;
@@ -21,7 +21,7 @@ public partial class MainWindow : Window
         if (version is not null)
         {
             Title = $"NumDeck {version.Major}.{version.Minor}.{version.Build}";
-            VersionText.Text = $"v{version.Major}.{version.Minor}.{version.Build} · stream deck · teclado numérico";
+            VersionText.Text = $"v{version.Major}.{version.Minor}.{version.Build} · Controlador de teclado numérico";
         }
     }
 

@@ -1,5 +1,10 @@
 # Novidades
 
+## 1.3.0
+
+- **Visual profissional:** tema escuro neutro em tons de grafite com acento azul técnico sóbrio, substituindo o visual neon anterior.
+- Removidos efeitos de brilho excessivo (halos, gradientes neon, grade de fundo e estética de terminal), com cabeçalho fixo, barra de status estruturada e teclas foscas com feedback nítido de seleção e pressionamento.
+
 ## 1.2.0
 
 - **Visual novo:** tema escuro com destaque em ciano e violeta, teclas em estilo de tecla física com ícone da ação (ou o ícone do próprio aplicativo), brilho na tecla selecionada e tecla que acende quando você a aperta.
